@@ -6,10 +6,17 @@ import Options from "./Options/Options";
 import Notification from "./Notification/Notification";
 
 function App() {
-  const [feedback, setFeedback] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
+  const [feedback, setFeedback] = useState(() => {
+    const savedFeedback = JSON.parse(
+      window.localStorage.getItem("saved-feedback")
+    );
+    return (
+      savedFeedback || {
+        good: 0,
+        neutral: 0,
+        bad: 0,
+      }
+    );
   });
 
   const addReviewHeandler = (review) => {
@@ -30,6 +37,10 @@ function App() {
       bad: 0,
     }));
   };
+
+  useEffect(() => {
+    window.localStorage.setItem("saved-feedback", JSON.stringify(feedback));
+  }, [feedback]);
 
   return (
     <>
