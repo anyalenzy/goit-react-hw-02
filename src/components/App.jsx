@@ -19,7 +19,7 @@ function App() {
     );
   });
 
-  const addReviewHeandler = (review) => {
+  const addReviewHandler = (review) => {
     setFeedback({ ...feedback, [review]: feedback[review] + 1 });
   };
 
@@ -31,11 +31,11 @@ function App() {
   const total = totalFeedback();
 
   const resetFeedback = () => {
-    setFeedback((feedback) => ({
+    setFeedback({
       good: 0,
       neutral: 0,
       bad: 0,
-    }));
+    });
   };
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function App() {
     <>
       <Description />
       <Options
-        addReview={addReviewHeandler}
+        addReview={addReviewHandler}
         total={total}
         resetFeedback={resetFeedback}
       ></Options>
